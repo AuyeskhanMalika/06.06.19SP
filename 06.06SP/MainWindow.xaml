@@ -17,32 +17,13 @@
                 <MenuItem Header="Print..."/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
-
-            <MenuItem Header="Edit">
-                <MenuItem Header="Cancel"/>
-                <MenuItem Header="Trimming"/>
-                <MenuItem Header="Copy"/>
-                <MenuItem Header="Insert"/>
-                <MenuItem Header="Delete"/>
-                <MenuItem Header="Search"/>
-                <MenuItem Header="Search next"/>
-                <MenuItem Header="Replace"/>
-                <MenuItem Header="Go over"/>
-                <MenuItem Header="Highlight"/>
-                <MenuItem Header="Highlight all"/>
-            </MenuItem>
-
-            <MenuItem Header="Format">
-                <MenuItem Name="WordWrapItem" Header="Word wrap" />
-                <MenuItem Header="Font"/>
-            </MenuItem>
-
+            
             <MenuItem Header="Reference">
                 <MenuItem Header="See help"/>
                 <MenuItem Header="About the program"/>
             </MenuItem>
         </Menu>
-        <TextBox Name="textBox" HorizontalAlignment="Left" Height="395" Margin="0,25,0,0" VerticalAlignment="Top" Width="790"/>
+        <RichTextBox Name="richTextBox" HorizontalAlignment="Left" Height="395" Margin="0,25,0,0" VerticalAlignment="Top" Width="790"/>
 
     </Grid>
 </Window>

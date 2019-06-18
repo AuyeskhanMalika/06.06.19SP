@@ -26,15 +26,21 @@ namespace _06._06SP
         public MainWindow()
         {
             InitializeComponent();
-            Timer timer = new Timer(SaveDoc, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10));
+            Timer timer = new Timer(IntermediateSaveFile, null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(10));
 
             Console.ReadLine();
             timer.Dispose();
         }
 
-        static void SaveDoc(object state)
+        private void IntermediateSaveFile(object state)
         {
-            
+            string filePath = $@"C:\Users\{Environment.UserName}\tmp";
+
+            using (var stream = File.Open(filePath, FileMode.Create))
+            {
+                byte[] dataBytes = Encoding.UTF8.GetBytes(new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text);
+                stream.Write(dataBytes, 0, dataBytes.Length);
+            }
         }
 
         private void SaveAsItemClick(object sender, RoutedEventArgs e)
@@ -43,7 +49,7 @@ namespace _06._06SP
             saveFileDialog.Filter = "Text File(*.txt)|*.txt";
             if(saveFileDialog.ShowDialog()==true)
             {
-                File.WriteAllText(saveFileDialog.FileName, textBox.Text);
+                File.WriteAllText(saveFileDialog.FileName, new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text);
             }
         }
 
@@ -52,14 +58,14 @@ namespace _06._06SP
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                textBox.Text = File.ReadAllText(openFileDialog.FileName);
+                new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text = File.ReadAllText(openFileDialog.FileName);
             }
         }
 
         private void CreateItemClick(object sender, RoutedEventArgs e)
         {
-            textBox.SelectAll();
-            textBox.Clear();
+            richTextBox.SelectAll();
+            richTextBox.Selection.Text = "";
         }
     }
 }
